@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import moment from 'moment';
 
 const Counter = () => {
-    let timer = null;
+    const timer = useRef(null);
     const [currentTime, setCurrentTime] = useState(moment());
+    useEffect(() => { console.log('changed')}, [currentTime]);
     useEffect(() => {
-        timer = setTimeout(() => {
-            setCurrentTime(current => current.add(1, 'seconds'));
+        timer.current = setInterval(() => {
+            setCurrentTime(current => moment(current.add(1, 's')));
         }, 1000); // every seconds
-        return () => clearTimeout(timer);
+        return () => clearInterval(timer.current);
     }, []);
-  return <div>
-      {currentTime.format('HH:mm:ss')}
-  </div>;
+    return <div>
+        {currentTime.format('HH:mm:ss')}
+    </div>;
 };
 
 export default Counter;
