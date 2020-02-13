@@ -1,5 +1,7 @@
+import React from 'react';
 class MyComponent extends React.Component {
   constructor(props) {
+    super(props);
     // set the default internal state
     this.state = {
       clicks: 0
@@ -16,7 +18,7 @@ class MyComponent extends React.Component {
 
   clickHandler() {
     this.setState({
-      clicks: this.clicks + 1
+      clicks: this.state.clicks + 1
     });
   }
 
@@ -25,7 +27,7 @@ class MyComponent extends React.Component {
 
     return (
       <div className="my-component" ref="myComponentDiv">
-      <h2>My Component ({this.state.clicks} clicks})</h2>
+      <h2>My Component ({this.state.clicks} clicks)</h2>
       <h3>{this.props.headerText}</h3>
     {children}
     </div>
